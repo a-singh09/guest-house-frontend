@@ -65,13 +65,13 @@ const Approvaltable = () => {
         <table className="approval-table ">
           <thead>
             <tr>
+              <th>Approval</th>
               <th>S.No</th>
               <th>Name</th>
               <th>Email id</th>
               <th>Contact Number</th>
               <th>Govt/College ID</th>
               <th>Reference</th>
-              <th>Approval</th>
             </tr>
           </thead>
           <tbody>
@@ -80,18 +80,7 @@ const Approvaltable = () => {
               pendingUsers.map((user, index) => {
                 return (
                   <tr key={user.user?._id}>
-                    <td>{index + 1}</td>
-                    <td>{user.user?.name}</td>
-                    <td>{user.user?.email}</td>
-                    <td>{user.user?.phone}</td>
-                    {user.user?.isAdmin ? (
-                      <td>-</td>
-                    ) : (
-                      <td>                            <GovtID url = {`${import.meta.env.VITE_API_URL}/images/${user.user?.idProof}`}/>        
-                      </td>
-                    )}
-                    <td>{user.user?.refInfo}</td>
-                    <td>
+                    <td style = {{border: '1px solid #fff'}}>
                       <button
                         type="button"
                         className="btn btn-success btn-sm mr-3"
@@ -110,6 +99,18 @@ const Approvaltable = () => {
                         Reject
                       </button>
                     </td>
+                    <td style = {{border: '1px solid #fff'}}>{index + 1}</td>
+                    <td style = {{border: '1px solid #fff'}}>{user.user?.name}</td>
+                    <td style = {{border: '1px solid #fff'}}>{user.user?.email}</td>
+                    <td style = {{border: '1px solid #fff'}}>{user.user?.phone}</td>
+                    {user.user?.isAdmin ? (
+                      <td style = {{border: '1px solid #fff'}}>-</td>
+                    ) : (
+                      <td style = {{border: '1px solid #fff'}}>                            <GovtID url = {`${import.meta.env.VITE_API_URL}/images/${user.user?.idProof}`}/>        
+                      </td>
+                    )}
+                    <td style = {{border: '1px solid #fff'}}>{user.user?.refInfo}</td>
+                    
                   </tr>
                 );
               })}

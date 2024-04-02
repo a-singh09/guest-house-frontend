@@ -114,16 +114,6 @@ export default function RegisteredUsers() {
             <CancelIcon style={{ fontSize: 50, color: "#275cb6" }} />
           </div>
           <div className="card rounded-4 w-100">
-            {/* <div
-              className="card-header rounded-4"
-              style={{
-                backgroundColor: "#0275d8",
-                color: "white",
-                border: "5px solid #0275d8",
-              }}
-            >
-              <h1>USER PROFILE</h1>
-            </div> */}
             <div className="card-body">
               <div className="d-flex flex-row bd-highlight mb-2">
                 <div className="p-2 bd-highlight">
@@ -168,23 +158,23 @@ export default function RegisteredUsers() {
             </button>
           </div>
 
-          <table className="table">
+          <table className="tables-data ">
             <thead>
-              <tr className="fw-semibold">
-                <th scope="col">S.No.</th>
-                <th scope="col">Name</th>
-                <th scope="col">Contact Number</th>
-                <th scope="col">Email Id</th>
-                <th scope="col">User Profile, Booking History</th>
-                <th scope="col">Action</th>
+              <tr>
+                <th>S.No.</th>
+                <th>Name</th>
+                <th>Contact Number</th>
+                <th>Email Id</th>
+                <th>User Detail</th>
+                <th>Action</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody style = {{margin : '0px 20px'}}>
               {(!search || search === "") && currentUsers &&
                 currentUsers.length > 0 &&
                 currentUsers.map((user, index) => (
                   <tr key={user._id}>
-                    <td>{index + 1}</td>
+                    <td >{index + 1}</td>
                     <td>{user.user?.name}</td>
                     <td>{user.user?.phone}</td>
                     <td>{user.user?.email}</td>
@@ -242,7 +232,7 @@ export default function RegisteredUsers() {
                   </tr>
                 ))}
             </tbody>
-          <tfoot>
+          <tfoot style = {{border : 'None'}}>
             <tr>
               <td colSpan="6">
                 <ul className="pagination justify-content-center">

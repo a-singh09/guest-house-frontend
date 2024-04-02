@@ -1,0 +1,595 @@
+.invoice {
+    max-width: 850px; 
+    margin: 0 auto; 
+  }
+  
+  .logo-icon {
+    height: 130px;
+    width: 130px;
+    position: relative;
+    object-fit: cover;
+  }
+  .heading,
+  .cnct,
+  .nitj {
+    align-self: stretch;
+    position: relative;
+    letter-spacing: 0.01em;
+  }
+  .heading {
+    margin: 0;
+    font-size: inherit;
+    line-height: 140%;
+    font-weight: 600;
+    font-family: inherit;
+  }
+  .cnct,
+  .nitj {
+    line-height: 20px;
+  }
+  .wrap {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 6px;
+    text-align: left;
+    font-size: 15px;
+    color: #667085;
+  }
+  .my-company,
+  .text,
+  .top {
+    display: flex;
+    max-width: 100%;
+  }
+  .text {
+    flex: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 6px;
+    min-width: 344px;
+  }
+  .my-company,
+  .top {
+    flex-direction: row;
+    align-items: center;
+  }
+  .my-company {
+    flex: 1;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 20px;
+  }
+  .top {
+    align-self: stretch;
+    justify-content: center;
+    flex-shrink: 0;
+    text-align: center;
+    font-size: 30px;
+    color: #333843;
+    font-family: Inter;
+  }
+  .bookhead,
+  .div {
+    align-self: stretch;
+    position: relative;
+    letter-spacing: 0.01em;
+    line-height: 20px;
+  }
+  .div {
+    font-size: 17px;
+    line-height: 24px;
+    font-weight: 600;
+    color: #333843;
+  }
+  .datehead {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 4px;
+  }
+  .arrivaledate,
+  .div1 {
+    align-self: stretch;
+    position: relative;
+    letter-spacing: 0.01em;
+    line-height: 20px;
+  }
+  .div1 {
+    font-size: 17px;
+    line-height: 24px;
+    font-weight: 600;
+    color: #333843;
+  }
+  .arrivehead {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 4px;
+  }
+  .spce {
+    align-self: stretch;
+    height: 20px;
+  }
+  .dates {
+    width: 200px;
+    border-radius: 8px;
+    background-color: #fafafa;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 10.5px 20px;
+    box-sizing: border-box;
+    gap: 16px;
+    min-width: 200px;
+  }
+  .userinfo1 {
+    line-height: 20px;
+  }
+  .userinfo1,
+  .cntinfo,
+  .name {
+    align-self: stretch;
+    position: relative;
+    letter-spacing: 0.01em;
+  }
+  .name {
+    font-size: 17px;
+    line-height: 24px;
+    font-weight: 600;
+    color: #333843;
+  }
+  .cntinfo {
+    line-height: 20px;
+  }
+  .adresse,
+  .wrap1 {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .adresse {
+    gap: 8px;
+  }
+  .guesthouse1,
+  .housename {
+    align-self: stretch;
+    position: relative;
+    letter-spacing: 0.01em;
+    line-height: 20px;
+    font-weight: bold;
+  }
+  .housename {
+    font-size: 17px;
+    line-height: 132%;
+   
+    color: #333843;
+  }
+  .userinfo,
+  .guesthouse {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .guesthouse {
+    align-self: stretch;
+    gap: 4px;
+  }
+  .userinfo {
+    flex: 1;
+    gap: 24px;
+    min-width: 263px;
+    max-width: 100%;
+  }
+  .dates-adresse,
+  .dates-adresse-wrapper {
+    display: flex;
+    flex-direction: row;
+    max-width: 100%;
+  }
+  .dates-adresse {
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+  }
+  .dates-adresse-wrapper {
+    align-self: stretch;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0 0 12.5px;
+    box-sizing: border-box;
+  }
+  .wrap2 {
+    width: 156px;
+    height: 20px;
+    display: none;
+  }
+  .userinfo2,
+  .name1 {
+    align-self: stretch;
+    position: relative;
+    letter-spacing: 0.01em;
+    line-height: 20px;
+    font-weight: bold;
+  }
+  .name1 {
+    font-size: 17px;
+    line-height: 24px;
+    font-weight: 500;
+    color: #333843;
+    text-align: center;
+  }
+  .userinfo-parent {
+    width: 156px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+  .guesthouse2,
+  .housename1 {
+    align-self: stretch;
+    position: relative;
+    letter-spacing: 0.01em;
+    line-height: 20px;
+    font-weight: bold;
+  }
+  .housename1 {
+    font-size: 17px;
+    line-height: 132%;
+    font-weight: 500;
+    color: #333843;
+    text-align: center;
+  }
+  .frame-group,
+  .bookinfo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .bookinfo {
+    align-self: stretch;
+    gap: 4px;
+  }
+  .frame-group {
+    width: 173px;
+    gap: 28px;
+    min-width: 173px;
+  }
+  .guesthouse3,
+  .housename2 {
+    position: relative;
+    letter-spacing: 0.01em;
+    line-height: 132%;
+    font-weight: bold;
+    
+  }
+  .guesthouse3 {
+    white-space: pre-wrap;
+    flex-shrink: 0;
+  }
+  .housename2 {
+    align-self: stretch;
+    font-size: 17px;
+    font-weight: 500;
+    color: #333843;
+    text-align: center;
+  }
+  .guesthouse-parent {
+    width: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 4px;
+  }
+  .frame-parent,
+  .main-inner {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    max-width: 100%;
+  }
+  .frame-parent {
+    flex: 1;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .main-inner {
+    width: 601px;
+    justify-content: flex-end;
+    padding: 0 60px 14.5px;
+    box-sizing: border-box;
+  }
+  .line-icon,
+  .line-icon1,
+  .line-icon2 {
+    align-self: stretch;
+    height: 1px;
+    position: relative;
+    max-width: 100%;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .line-icon1,
+  .line-icon2 {
+    margin-top: -0.5px;
+  }
+  .label {
+    align-self: stretch;
+    height: 0;
+    background-color: #fafafa;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  .line-icon3 {
+    position: relative;
+    max-width: 100%;
+    overflow: hidden;
+    flex-shrink: 0;
+    margin-top: -0.2px;
+  }
+  .label-parent,
+  .line-icon3,
+  .line-icon4 {
+    align-self: stretch;
+    height: 0.5px;
+  }
+  .line-icon4 {
+    position: relative;
+    max-width: 100%;
+    overflow: hidden;
+    flex-shrink: 0;
+    z-index: 1;
+    margin-top: -0.2px;
+  }
+  .label-parent {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .div2,
+  .total-ht {
+    position: relative;
+    letter-spacing: 0.01em;
+    line-height: 16px;
+    display: inline-block;
+  }
+  .total-ht {
+    width: 120px;
+    flex-shrink: 0;
+  }
+  .div2 {
+    width: 82px;
+    font-weight: 500;
+    color: #333843;
+    text-align: right;
+  }
+  .frame-wrapper,
+  .payment_amount {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .payment_amount {
+    flex: 1;
+    gap: 24px;
+  }
+  .frame-wrapper {
+    align-self: stretch;
+    padding: 0 12px;
+  }
+  .div3,
+  .deducthead {
+    position: relative;
+    letter-spacing: 0.01em;
+    line-height: 16px;
+    display: inline-block;
+  }
+  .deducthead {
+    width: 120px;
+    flex-shrink: 0;
+  }
+  .div3 {
+    width: 82px;
+    font-weight: 500;
+    color: #333843;
+    text-align: right;
+  }
+  .frame-div,
+  .deducted {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .deducted {
+    flex: 1;
+    gap: 24px;
+  }
+  .frame-div {
+    align-self: stretch;
+    padding: 0 12px;
+  }
+  .div4,
+  .total-return {
+    position: relative;
+    letter-spacing: 0.01em;
+    line-height: 16px;
+    display: inline-block;
+  }
+  .total-return {
+    width: 120px;
+    flex-shrink: 0;
+  }
+  .div4 {
+    width: 82px;
+    font-weight: 500;
+    color: #333843;
+    text-align: right;
+  }
+  .frame-wrapper1,
+  .return {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .return {
+    flex: 1;
+    gap: 24px;
+  }
+  .frame-wrapper1 {
+    align-self: stretch;
+    padding: 0 12px;
+  }
+  .line-icon5 {
+    align-self: stretch;
+    height: 0.5px;
+    position: relative;
+    max-width: 100%;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .b,
+  .total-ttc {
+    position: relative;
+    letter-spacing: 0.01em;
+    line-height: 16px;
+    display: inline-block;
+  }
+  .total-ttc {
+    width: 120px;
+    flex-shrink: 0;
+  }
+  .b {
+    width: 82px;
+    text-align: right;
+  }
+  .finalp {
+    flex: 1;
+    flex-direction: row;
+    gap: 24px;
+  }
+  .frame-container,
+  .frame-wrapper2,
+  .finalp {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .frame-wrapper2 {
+    align-self: stretch;
+    flex-direction: row;
+    padding: 0 12px;
+    color: #333843;
+  }
+  .frame-container {
+    width: 250px;
+    height: 112px;
+    flex-direction: column;
+    gap: 11.9px;
+    font-size: 15px;
+  }
+  
+  .bottom,
+  .main {
+    align-self: stretch;
+  }
+  .main {
+    
+    border-radius: 12px;
+    background-color: #fff;
+    border: 0.5px solid #e0e2e7;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+    padding: 24px 23px 101px;
+    gap: 19.5px;
+    max-width: 100%;
+    flex-shrink: 0;
+    text-align: left;
+    font-size: 15px;
+    color: #667085;
+    font-family: Inter;
+  }
+  .bottom {
+    height: 16px;
+    display: none;
+  }
+  .invoice {
+    width: 100%;
+    border-radius: 12px;
+    background-color: #fff;
+    box-shadow: 0 4px 30px rgba(26, 28, 33, 0.05);
+    border: 1px solid #f0f1f3;
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 32px 31px 80px;
+    gap: 32px;
+    letter-spacing: normal;
+  }
+  @media screen and (max-width: 625px) {
+    .dates {
+      flex: 1;
+    }
+    .dates-adresse {
+      flex-wrap: wrap;
+    }
+    .frame-group {
+      flex: 1;
+    }
+    .frame-parent {
+      flex-wrap: wrap;
+    }
+    .main,
+    .main-inner {
+      box-sizing: border-box;
+    }
+    .main-inner {
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+    .main {
+      padding-top: 20px;
+      padding-bottom: 66px;
+    }
+  }
+  
+  .download-button:hover {
+    background-color: #0056b3;
+  }
+  @media screen and (max-width: 450px) {
+    .text {
+      min-width: 100%;
+    }
+    .invoice {
+      gap: 16px 32px;
+    }
+  }

@@ -215,11 +215,7 @@ const Calendar = () => {
 
   return (
     <div>
-      <Link className="navlink-booknow-calendar" to="/login">
-        <div>
-          <div className="book-now-calendar">Book Now</div>
-        </div>
-      </Link>
+      
       <div id="calendar-root">
         <div className="header">
           <div
@@ -228,6 +224,11 @@ const Calendar = () => {
           >
             Previous Month
           </div>
+          <Link className="navlink-booknow-calendar" to="/login">
+            <div>
+              <div className="book-now-calendar">Book Now</div>
+            </div>
+          </Link>
           <h2 className="month-year">
             {displayedMonth.toLocaleString("default", {
               month: "long",
@@ -235,7 +236,7 @@ const Calendar = () => {
             })}
           </h2>
           <div
-            className={`btn ${!isWithinAllowedRange() ? "disabled" : ""}`}
+            className={`btn ${!isWithinAllowedRange() ? "disabled" : ""}`} style = {{border : '1px solid grey'}}
             onClick={() => nextMonth()}
           >
             Next Month

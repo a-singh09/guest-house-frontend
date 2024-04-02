@@ -58,9 +58,31 @@
 .inputs option{
   font-weight: 300;
 }
-.table-data{
+
+.tables-data {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
+
+.tables-data table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.tables-data th {
+  border: 1px solid #dddddd;
+  background-color: #0275d8;
+  width: 150px; 
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+}
+
+.tables-data td {
+  border: 1px solid #dddddd;
+  width: 150px; 
+  word-wrap: break-word; 
+}
+

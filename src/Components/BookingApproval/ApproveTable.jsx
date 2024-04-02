@@ -120,7 +120,7 @@ const Approvaltable = ({ onSecondPage }) => {
             <table className="book-approval-table">
               <thead>
                 <tr>
-                <th>Approval</th>
+                  <th>Approval</th>
                   <th>S.No</th>
                   <th>Name</th>
                   <th>Guest House</th>

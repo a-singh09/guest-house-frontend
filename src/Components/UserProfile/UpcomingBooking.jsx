@@ -13,9 +13,8 @@ const UpcomingBooking = () => {
   const [bookingId, setBookingId] = useState("");
   const { userId } = useUserContext();
   const [bookings, setBookings] = useState([]);
-
-  useEffect(() => {
-    // Fetch upcoming bookings data from the database
+  const [paymentStatus, setPaymentStatus] =  useState([]);
+  useEffect(() => { 
     fetch(
       `${import.meta.env.VITE_API_URL}/users/${userId}/bookingHistory/upcoming`
     )
@@ -55,7 +54,7 @@ const UpcomingBooking = () => {
   };
 
   const handlePayment = () => {
-    window.confirm("Do you want to proceed for payment?");
+    
   };
 
   const handleCancel = (id, status) => {
@@ -101,11 +100,11 @@ const UpcomingBooking = () => {
       {bookings.length > 0 ? (
         <div>
           <div className="row" style={{ padding: "3%" }}>
-            <h2 style={{ color: "#0275d8", backgroundColor: "#d8f4ff" }}>
+            <h2 style={{ color: "#0275d8", backgroundColor: "#d8f4ff",padding: '8px', display: 'flex', justifyContent : 'center' }}>
               Upcoming Booking
             </h2>
           </div>
-          <table>
+          <table className="tables-data" style = {{marginLeft : '12px', marginRight : '12px'}}>
             <thead>
               <tr>
                 <th>ID</th>
@@ -126,12 +125,12 @@ const UpcomingBooking = () => {
                   <tr key={booking._id}>
                     <td>{index + 1}</td>
                     <td>
-                      {booking.status === "approved"
+                      {(booking.status === "approved" || booking.status === 'paid')
                         ? formatRoomData(booking.roomsAllotted)
                         : "NOT ALLOTTED"}
                     </td>
                     <td>
-                      {booking.status === "approved"
+                      {(booking.status === "approved"|| booking.status === 'paid')
                         ? booking.guestHouseSelected === 1
                           ? "INSTITUTE GUEST HOUSE"
                           : booking.guestHouseSelected === 2
@@ -202,15 +201,15 @@ const UpcomingBooking = () => {
 
                     {booking.status === "approved" && (
                       <td>
-                        <Link to="/testGate" state={{ bookingId: booking._id }}>
-                          <button
-                            className="btn"
-                            style={{ backgroundColor: "green", color: "white" }}
-                            disabled
+                        <button className="btn" style = {{ backgroundColor: "green", color: "white", border : 'none'}}>
+                          <a target = "_blank"
+                            href = {`${import.meta.env.VITE_API_URL}/payments/makepayment?booking_id=${booking._id}`}
+                            style={{width : '100%', height : '100%', backgroundColor: "green", color: "white"}}
                           >
                             Pay Now
-                          </button>
-                        </Link>
+                          </a>
+                        </button>
+                        
                       </td>
                     )}
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import './Receipt.css';
+import './cancelReceipt.css';
 import { useUserContext } from '../ContextHooks/UserContext'; 
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';

@@ -52,10 +52,11 @@ const ReceiptDownload = ({bookingId}) => {
       { label: 'Phone Number:', value: invoiceData[0].roomBooker.phone },
       { label: 'Email:', value: invoiceData[0].roomBooker.email },
       { label: 'Date of Arrival:', value: new Date(invoiceData[0].startDate).toLocaleDateString() },
+      { label: 'Date of Departure:', value: new Date(invoiceData[0].endDate).toLocaleDateString() },
       { label: 'No of Days:', value: `${noOfDays(invoiceData[0].startDate, invoiceData[0].endDate)}` },
-      { label: 'Cost of Each Room:', value: `₹${guestHouseCost[invoiceData[0].guestHouseSelected - 1]}` },
+      { label: 'Cost of Each Room:', value: `${guestHouseCost[invoiceData[0].guestHouseSelected - 1]}` },
       { label: 'Total Rooms:', value: `${invoiceData[0].roomsSelected}` },
-      { label: 'Total Payment:', value: `₹${guestHouseCost[invoiceData[0].guestHouseSelected - 1] * invoiceData[0].roomsSelected * noOfDays(invoiceData[0].startDate, invoiceData[0].endDate)}` }
+      { label: 'Total Payment:', value: `${guestHouseCost[invoiceData[0].guestHouseSelected - 1] * invoiceData[0].roomsSelected * noOfDays(invoiceData[0].startDate, invoiceData[0].endDate)}` }
     ];
   
     details.forEach((detail, index) => {

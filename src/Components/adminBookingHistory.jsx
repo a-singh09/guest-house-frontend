@@ -130,8 +130,8 @@ useEffect(() => {
   return (
     <>
         <div>
-          <div style={{ color: "#0275d8", backgroundColor: "#d8f4ff" }}>
-            <h2 style={{ padding: '4px' }}>Booking History</h2>
+          <div style={{ color: "#0275d8", backgroundColor: "#d8f4ff",padding: '8px', display: 'flex', justifyContent : 'center' }}>
+            <h2>Booking History</h2>
           </div>
           <div className = "filter-box">
             <div className = "form-group">
@@ -205,7 +205,7 @@ useEffect(() => {
             <tbody>
               {bookings.map((booking, index) => (
                 <tr key={booking.id}>
-                  <td>{index + 1}</td>
+                  <td style = {{}}>{index + 1}</td>
                   <td>
                     {booking.status === "pending" ||
                       booking.status === "rejected" ||
