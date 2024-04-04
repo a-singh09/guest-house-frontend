@@ -202,7 +202,7 @@ const UpcomingBooking = () => {
                     {booking.status === "approved" && (
                       <td>
                         <button className="btn" style = {{ backgroundColor: "green", color: "white", border : 'none'}}>
-                          <a target = "_blank"
+                          <a 
                             href = {`${import.meta.env.VITE_API_URL}/payments/makepayment?booking_id=${booking._id}`}
                             style={{width : '100%', height : '100%', backgroundColor: "green", color: "white"}}
                           >
