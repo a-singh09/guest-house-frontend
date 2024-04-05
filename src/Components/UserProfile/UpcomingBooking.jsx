@@ -125,12 +125,12 @@ const UpcomingBooking = () => {
                   <tr key={booking._id}>
                     <td>{index + 1}</td>
                     <td>
-                      {(booking.status === "approved" || booking.status === 'paid')
+                      {(booking.status === "approved" || booking.status === 'paid' || booking.status === 'PAYMENT SUCCESS')
                         ? formatRoomData(booking.roomsAllotted)
                         : "NOT ALLOTTED"}
                     </td>
                     <td>
-                      {(booking.status === "approved"|| booking.status === 'paid')
+                      {(booking.status === "approved"|| booking.status === 'paid' || booking.status === 'PAYMENT SUCCESS')
                         ? booking.guestHouseSelected === 1
                           ? "INSTITUTE GUEST HOUSE"
                           : booking.guestHouseSelected === 2
