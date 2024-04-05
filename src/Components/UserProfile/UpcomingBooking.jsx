@@ -14,6 +14,7 @@ const UpcomingBooking = () => {
   const { userId } = useUserContext();
   const [bookings, setBookings] = useState([]);
   const [paymentStatus, setPaymentStatus] =  useState([]);
+  const [hasShownApprovalAlert, setHasShownApprovalAlert] = useState(false);
   useEffect(() => { 
     fetch(
       `${import.meta.env.VITE_API_URL}/users/${userId}/bookingHistory/upcoming`
@@ -30,7 +31,16 @@ const UpcomingBooking = () => {
         )
       );
   }, [userId, bookings]);
+  useEffect(() => {
+    // Check if any booking has been approved
+    const hasApprovedBooking = bookings.some(booking => booking.status === "approved");
 
+    // If there is an approved booking and the alert hasn't been shown yet, show the alert
+    if (hasApprovedBooking && !hasShownApprovalAlert) {
+      alert('Your booking has been approved. Kindly complete the payment within 24 hours, otherwise, the booking will be automatically canceled.');
+      setHasShownApprovalAlert(true); // Update state to indicate that the alert has been shown
+    }
+  }, [bookings, hasShownApprovalAlert]);
   function formatDateToISO(input_date) {
     let date = new Date(input_date);
     const year = date.getFullYear();
@@ -141,9 +151,22 @@ const UpcomingBooking = () => {
                     <td>{formatDateToISO(booking.createdAt)}</td>
                     <td>{formatDateToISO(booking.startDate)}</td>
                     <td>{formatDateToISO(booking.endDate)}</td>
-                    <td>{booking.status}</td>
-
+                    <td>{booking.status}</td> 
                     {booking.status === "pending" && (
+                      <td>
+                        {" "}
+                        <button
+                          className="btn"
+                          style={{ backgroundColor: "red", color: "white" }}
+                          onClick={() =>
+                            handleCancel(booking._id, booking.status)
+                          }
+                        >
+                          Cancel
+                        </button>
+                      </td>
+                    )}
+                    {booking.status === "PAYMENT SUCCESS" && (
                       <td>
                         {" "}
                         <button
@@ -186,7 +209,7 @@ const UpcomingBooking = () => {
                         </button>
                       </td>
                     )}
-                    {booking.status === "paid" && (
+                    {(booking.status === "paid" || booking.status === "PAYMENT SUCCESS")&& (
                       <td>
                         <button
                           className="btn"
