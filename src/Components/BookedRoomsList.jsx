@@ -69,7 +69,7 @@ function BookedRoomsList({ guestHouse = "INSTITUTE GUEST HOUSE" }) {
     fetchGuestHouseData(index);
   }, [index, selectedDate]);
 
- /*
+ 
   const handleRoomClick = async (roomIndex) => {
     if (!roomStatus[roomIndex]) {
       setSelectedRooms((prevSelectedRooms) => {
@@ -105,7 +105,7 @@ function BookedRoomsList({ guestHouse = "INSTITUTE GUEST HOUSE" }) {
         console.error("Error fetching booking details:", error.message);
       }
     }
-  };*/
+  };
 
   // const [selectedDate, setSelectedDate] = React.useState(new Date());
 

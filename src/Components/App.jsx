@@ -78,7 +78,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/receipt" element={<Receipt/>} />
                 <Route path="/testgate" element={<TestGate />} />
-                <Route path="/upcomingReport"       element={
+                <Route path="/upcomingReport" element={
                 <UpcomingBookingTable/>
                 }               
                 />
