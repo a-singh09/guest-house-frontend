@@ -18,12 +18,31 @@
   font-weight: bolder;
 }
 
-.inputs {
+/* .inputs {
   font-size: 15px;
   margin: auto;
   font-weight: 400 !important;
   text-align: center !important;
+} */
+
+.inputs {
+  font-size: 15px;
+  margin: auto;
+  font-weight: 400;
+  text-align: center;
+  padding-right: 25px; /* Adjust the padding as needed */
 }
+
+/* Style the dropdown arrow */
+.inputs::after {
+  content: "\25BC"; /* Unicode character for the dropdown arrow */
+  position: absolute;
+  top: 50%;
+  right: 10px; /* Adjust the spacing from the text */
+  transform: translateY(-50%);
+  pointer-events: none; /* Ensure the arrow doesn't interfere with clicking */
+}
+
 .inputs option{
   /* width: 1000px; */
   /* font-weight: 300; */
