@@ -8,10 +8,12 @@ import { FormContext } from "../ContextHooks/FormContext";
 import { useLoginContext } from "../ContextHooks/LoginContext";
 
 const inputStyle = {
+  fontSize:"14px",
   backgroundColor: "#f8f9fa",
   color: "black",
   fontWeight: 500,
-  // width:"280px"
+  paddingRight:"24px",
+  // paddingLeft:"20px"
 };
 
 const toastStyle = {
@@ -78,7 +80,7 @@ const BookingDetails = ({ setDateDetails }) => {
 
   const [durationOfStay, setDurationOfStay] = useState(1); // Default to 1 day.
   const [selectedGuestHouse, setSelectedGuestHouse] = useState(
-    "Institute Guest House"
+    "SAC Guest House"
   );
   const [roomsSelected, setRoomsSelected] = useState(1);
 
@@ -200,13 +202,13 @@ const BookingDetails = ({ setDateDetails }) => {
   const handleReset = () => {
     if(isAdm){
       setCheckinDate(todayDateString);
-    } else {
+    } else { 
       setCheckinDate(initialCheckinDate)
     }
     setCheckoutDate(tomorrowDateString);
     
     setDurationOfStay(1);
-    setSelectedGuestHouse("Institute Guest House");
+    setSelectedGuestHouse("SAC Guest House");
     setRoomsSelected(1);
   };
 
@@ -288,7 +290,7 @@ const BookingDetails = ({ setDateDetails }) => {
           NUMBER OF ROOMS
         </label>
         <select
-          className="form-control inputs"
+          className="form-select inputs"
           style={inputStyle}
           id="rooms"
           value={roomsSelected}
