@@ -209,7 +209,7 @@ const UpcomingBooking = () => {
                         </button>
                       </td>
                     )}
-                    {(booking.status === "paid" || booking.status === "PAYMENT SUCCESS")&& (
+                    {(booking.status === "paid" || booking.status === "PAYMENT SUCCESS" || booking.paymentStatus === 'SUCCESS')&& (
                       <td>
                         <button
                           className="btn"
@@ -222,7 +222,7 @@ const UpcomingBooking = () => {
                     )}
 
 
-                    {booking.status === "approved" && (
+                    {(booking.paymentStatus !== 'SUCCESS' && booking.status === "approved") && (
                       <td>
                         <button className="btn" style = {{ backgroundColor: "green", color: "white", border : 'none'}}>
                           <a 
