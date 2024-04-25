@@ -124,6 +124,7 @@ const UpcomingBooking = () => {
                 <th>Check-In</th>
                 <th>Check-Out</th>
                 <th>Status</th>
+                <th>Payment Status</th>
                 <th>Cancel Booking</th>
                 <th>Payment </th>
               </tr>
@@ -152,7 +153,8 @@ const UpcomingBooking = () => {
                     <td>{formatDateToISO(booking.startDate)}</td>
                     <td>{formatDateToISO(booking.endDate)}</td>
                     <td>{booking.status}</td> 
-                    {booking.status === "pending" && (
+                    <td>{booking.paymentStatus}</td>
+                    {booking.status !== "cancelled"  && (
                       <td>
                         {" "}
                         <button
@@ -165,8 +167,23 @@ const UpcomingBooking = () => {
                           Cancel
                         </button>
                       </td>
+                     )} 
+                    {booking.status === "cancelled" && (
+                      <td>
+                        {" "}
+                        <button
+                          className="btn"
+                          style={{ backgroundColor: "red", color: "white" }}
+                          onClick={() =>
+                            handleCancel(booking._id, booking.status)
+                          }
+                          disabled
+                        >
+                          Cancel
+                        </button>
+                      </td>
                     )}
-                    {booking.status === "PAYMENT SUCCESS" && (
+                    {/* { && (
                       <td>
                         {" "}
                         <button
@@ -179,8 +196,9 @@ const UpcomingBooking = () => {
                           Cancel
                         </button>
                       </td>
-                    )}
-                    {booking.status === "approved" && (
+                    )} */}
+{/* 
+                    { && (
                       <td>
                         {" "}
                         <button
@@ -193,23 +211,20 @@ const UpcomingBooking = () => {
                           Cancel
                         </button>
                       </td>
-                    )}
-
-                    {booking.status === "paid" && (
+                    )} */}
+                    {booking.status !== "approved" &&(
                       <td>
-                        {" "}
                         <button
                           className="btn"
                           style={{ backgroundColor: "red", color: "white" }}
-                          onClick={() =>
-                            handleCancel(booking._id, booking.status)
-                          }
+                          onClick={() => setShowPaidPopup(true)}
+                          disabled
                         >
-                          Cancel
+                          Pay Now
                         </button>
                       </td>
                     )}
-                    {(booking.status === "paid" || booking.status === "PAYMENT SUCCESS" || booking.paymentStatus === 'SUCCESS')&& (
+                    {(booking.paymentStatus === 'SUCCESS' &&  booking.status === "approved")&& (
                       <td>
                         <button
                           className="btn"
@@ -220,7 +235,6 @@ const UpcomingBooking = () => {
                         </button>
                       </td>
                     )}
-
 
                     {(booking.paymentStatus !== 'SUCCESS' && booking.status === "approved") && (
                       <td>
