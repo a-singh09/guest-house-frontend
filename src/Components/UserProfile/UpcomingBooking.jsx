@@ -33,7 +33,7 @@ const UpcomingBooking = () => {
   }, [userId, bookings]);
   useEffect(() => {
     // Check if any booking has been approved
-    const hasApprovedBooking = bookings.some(booking => booking.status === "approved");
+    const hasApprovedBooking = bookings.some(booking => booking.paymentStatus === "UNPAID" && booking.status === 'approved');
 
     // If there is an approved booking and the alert hasn't been shown yet, show the alert
     if (hasApprovedBooking && !hasShownApprovalAlert) {
@@ -72,11 +72,11 @@ const UpcomingBooking = () => {
     console.log("booking status : ", status);
     setBookingId(id);
     if (window.confirm("Are you sure you want to cancel this booking?")) {
-      if (status == "approved" || status == "pending") {
+      if (status === 'SUCCESS') {
         // if( status == 'pending') {
-        handleBookingDeletion(id);
-      } else {
-        setShowPopup(true);
+          setShowPopup(true);
+        } else {
+          handleBookingDeletion(id);
       }
     }
   };
@@ -154,14 +154,14 @@ const UpcomingBooking = () => {
                     <td>{formatDateToISO(booking.endDate)}</td>
                     <td>{booking.status}</td> 
                     <td>{booking.paymentStatus}</td>
-                    {booking.status !== "cancelled"  && (
+                {booking.status !== "cancelled"  && (
                       <td>
                         {" "}
                         <button
                           className="btn"
                           style={{ backgroundColor: "red", color: "white" }}
                           onClick={() =>
-                            handleCancel(booking._id, booking.status)
+                            handleCancel(booking._id, booking.paymentStatus)
                           }
                         >
                           Cancel
@@ -250,7 +250,7 @@ const UpcomingBooking = () => {
                       </td>
                     )}
 
-                    {booking.status === "pending" && (
+                    {/* {booking.status === "pending" && (
                       <td>
                         {" "}
                         <button
@@ -261,7 +261,7 @@ const UpcomingBooking = () => {
                           Pay Now
                         </button>
                       </td>
-                    )}
+                    )} */}
                   </tr>
                 ))}
             </tbody>
