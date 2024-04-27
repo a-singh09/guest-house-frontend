@@ -281,6 +281,7 @@ useEffect(() => {
                     {booking.status === 'paid' && <ReceiptDownload bookingId = {booking.id}/>}
                     {booking.status === 'PAYMENT SUCCESS' && <ReceiptDownload bookingId = {booking.id}/>}
                     {booking.status === 'cancelled' && <CancelReceipt bookingId = {booking.id}/>}
+                    {booking.status === 'refundInitiated' && <CancelReceipt bookingId = {booking.id}/>}
                   </td>
                 </tr>
               ))}

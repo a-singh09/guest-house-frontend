@@ -154,7 +154,7 @@ const UpcomingBooking = () => {
                     <td>{formatDateToISO(booking.endDate)}</td>
                     <td>{booking.status}</td> 
                     <td>{booking.paymentStatus}</td>
-                {booking.status !== "cancelled"  && (
+                {booking.status !== "refundInitiated"  && (
                       <td>
                         {" "}
                         <button
@@ -168,7 +168,7 @@ const UpcomingBooking = () => {
                         </button>
                       </td>
                      )} 
-                    {booking.status === "cancelled" && (
+                    {booking.status === "refundInitiated" && (
                       <td>
                         {" "}
                         <button
@@ -303,7 +303,7 @@ const UpcomingBooking = () => {
       {showPopup && (
         <CancelPopUp isOpen={showPopup} closePopup={() => setShowPopup(false)}>
           <CancelForm
-            bookingId={bookingId}
+            bookingId={bookingId} 
             onDeleteSuccess={() => handleBookingDeletion(bookingId)}
           />
         </CancelPopUp>

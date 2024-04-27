@@ -53,11 +53,11 @@ const CancelReceipt = ({bookingId}) => {
       { label: 'Email:', value: invoiceData[0].roomBooker.email },
       { label: 'Date of Arrival:', value: new Date(invoiceData[0].startDate).toLocaleDateString() },
       { label: 'No of Days:', value: `${noOfDays(invoiceData[0].startDate, invoiceData[0].endDate)}` },
-      { label: 'Cost of Each Room:', value: `₹${guestHouseCost[invoiceData[0].guestHouseSelected - 1]}` },
+      { label: 'Cost of Each Room:', value: `${guestHouseCost[invoiceData[0].guestHouseSelected - 1]}` },
       { label: 'Total Rooms:', value: `${invoiceData[0].roomsSelected}` },
-      { label: 'Payment Amount:', value: `₹${guestHouseCost[invoiceData[0].guestHouseSelected - 1] * invoiceData[0].roomsSelected * noOfDays(invoiceData[0].startDate, invoiceData[0].endDate)}` },
-      { label: 'Deducted Amount:', value: `₹${guestHouseCost[invoiceData[0].guestHouseSelected - 1] * invoiceData[0].roomsSelected * noOfDays(invoiceData[0].startDate, invoiceData[0].endDate)*.25}` },
-      { label: 'Returned Amount:', value: `₹${guestHouseCost[invoiceData[0].guestHouseSelected - 1] * invoiceData[0].roomsSelected * noOfDays(invoiceData[0].startDate, invoiceData[0].endDate)*.75}` },
+      { label: 'Payment Amount:', value: `${guestHouseCost[invoiceData[0].guestHouseSelected - 1] * invoiceData[0].roomsSelected * noOfDays(invoiceData[0].startDate, invoiceData[0].endDate)}` },
+      { label: 'Deducted Amount:', value: `${guestHouseCost[invoiceData[0].guestHouseSelected - 1] * invoiceData[0].roomsSelected * noOfDays(invoiceData[0].startDate, invoiceData[0].endDate)*.25}` },
+      { label: 'Returned Amount:', value: `${guestHouseCost[invoiceData[0].guestHouseSelected - 1] * invoiceData[0].roomsSelected * noOfDays(invoiceData[0].startDate, invoiceData[0].endDate)*.75}` },
 
     ];
   
