@@ -56,21 +56,21 @@ const ResetPassword = () => {
     <div className="resetmain1">
       <div className="resethead1">Reset Password</div>
 
-      <div>
+      {/* <div> */}
         <form className="resetform1">
-          <label htmlFor="registeredemail" className='registeredemail'>Enter Registered Email:&nbsp;&nbsp;</label>
+          <label htmlFor="registeredemail" className='registeredemail2'>Enter Registered Email</label>
           <br className="resetbreaker" />
           <input type="text" id="registeredemail" value={user[0]?.email} name="emailid" className="forgetinputbox" onChange={(e) => { setEmail(e.target.value) }} /><br></br>
-          <label htmlFor="newpassword" className='registeredemail'>Enter New Password :</label>
+          <label htmlFor="newpassword" className='registeredemail2'>Enter New Password</label>
           <br className="resetbreaker" />
-          <input type="password" id="newpass" name="newpass" className="resetinputbox" onChange={(e) => { setPass(e.target.value) }} /><br /><br />
-          <label htmlFor="cnfrmpassword" className='registeredemail'>Confirm New Password:</label>
+          <input type="password" id="newpass" name="newpass" className="forgetinputbox" onChange={(e) => { setPass(e.target.value) }} /><br /><br />
+          <label htmlFor="cnfrmpassword" className='registeredemail1'>Confirm New Password</label>
           <br className="resetbreaker" />
-          <input type="password" id="cnfpass" name="confirmpass" className="resetinputbox1" onChange={(e) => { setConfirmPass(e.target.value) }} />
+          <input type="password" id="cnfpass" name="confirmpass" className="forgetinputbox" onChange={(e) => { setConfirmPass(e.target.value) }} />
           <br />
           <p style={{ color: "red", fontSize: "0.8rem", textDecoration: "underline" }}>{error && "Both passwords does not match..."}</p>
         </form>
-      </div>
+      {/* </div> */}
 
       <div className="resetbook" onClick={handleClick}>Submit</div>
 

@@ -80,8 +80,8 @@ const Dash = ({ admin, isMainAdmin }) => {
   };
   const selectContent = (content) => {
     setContentType(content);
-    if(x < 1000){
-       setSidestate(!sideState);
+    if (x < 1000) {
+      setSidestate(!sideState);
     }
     console.log(contentType);
   };
@@ -136,7 +136,7 @@ const Dash = ({ admin, isMainAdmin }) => {
     bookedRooms: <BookedRooms />,
     registeredUsers: <RegisteredUsers />,
     adminReports: <AdminReport />,
-    adminbooking : <AdminBookingHistory/>,
+    adminbooking: <AdminBookingHistory />,
     manageAdmins: <ManageAdmin />
   };
 
@@ -189,6 +189,19 @@ const Dash = ({ admin, isMainAdmin }) => {
                     Admin Room Booking
                   </span>
                 </div>
+
+                <div
+
+                  onClick={() => selectContent("approve")}
+                  className="dash-optn"
+                 >
+                  <span>
+                    <PersonAddIcon />
+                    Approve Registrations
+                  </span>
+                </div>
+
+
                 <div
                   onClick={() => selectContent("approvebooking")}
                   className="dash-optn"
@@ -199,16 +212,10 @@ const Dash = ({ admin, isMainAdmin }) => {
                   </span>
                 </div>
 
-                <div
 
-                  onClick={() => selectContent("approve")}
-                  className="dash-optn"
-                >
-                  <span>
-                    <PersonAddIcon />
-                    Approve Registrations
-                  </span>
-                </div>
+
+
+
 
                 <div
                   // onClick={() => selectContent("approve")}
@@ -245,7 +252,7 @@ const Dash = ({ admin, isMainAdmin }) => {
                   className="dash-optn"
                 >
                   <span>
-                    <AssignmentTurnedInIcon/>
+                    <AssignmentTurnedInIcon />
                     Booking History
                   </span>
                 </div>
