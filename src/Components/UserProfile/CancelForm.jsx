@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
-const CancelForm = ({ bookingId: id, onDeleteSuccess }) => {
+const CancelForm = ({ bookingId: id, onDeleteSuccess}) => {
   const [bookingId, setBookingId] = useState('');
-
-
+  const [bookingDetail, setBookingDetails] = useState();
+  const guestHouses = ["INSTITUTE GUEST HOUSE", "MEGA GUEST HOUSE", "SAC GUEST HOUSE"];
+  const guestHouseCost = [1000, 600, 600];
   useEffect(()=>{
-
-     setBookingId(id);
-  }, [id])
+    
+    setBookingId(id);
+  }, [])
   const [formData, setFormData] = useState({
     name: '',
     bankname : '',
@@ -21,9 +22,8 @@ const CancelForm = ({ bookingId: id, onDeleteSuccess }) => {
     setFormData({ ...formData, [name]: value });
 
   };
-
-
-  console.log("Booking ID: ", bookingId);
+  // console.log('Boooking data', bookingDetails);
+  // console.log("Booking ID: ", bookingId);
   const handleSubmit = async (e) => {
     e.preventDefault();
     setForm(false);
@@ -42,7 +42,9 @@ const CancelForm = ({ bookingId: id, onDeleteSuccess }) => {
           IFSC: formData.ifscCode,
         })
       });
-      console.log("response : ",response);
+      const data = await response.json();
+      setBookingDetails(data);
+      console.log("response : ", data); 
       
       if (!response.ok) {
         throw new Error('Failed to save form data');
@@ -50,27 +52,26 @@ const CancelForm = ({ bookingId: id, onDeleteSuccess }) => {
 
       // Update the result state with the saved data
       setResult({
-        guestHouse: 'booking.guestHouse',
-        name: 'test name',
-        branch: 'booking.branch',
-        accountNumber: 'accountNumber',
-        ifscCode: 'ifscCode',
+        guestHouse: guestHouses[data?.guestHouse-1],
+        name: data?.name,
+        branch: data?.bankName,
+        accountNumber: data?.accountNumber,
+        ifscCode: data?.IFSC,
         // arrivalDate: arrivalDate.toDateString(),
-        arrivalDate: 'arrivalDate.toDateString()',
-        cancellationDate: 'cancellationDate.toDateString()',
+        arrivalDate: data?.arrivalDate,
+        cancellationDate: data?.cancellationDate,
         // cancellationDate: cancellationDate.toDateString(),
-        numberOfDays:'12',
-        amountDeducted:'12',
-        amountReturned:'12',
+        numberOfDays: data?.noOfDays,
+        amountDeducted: data?.amountDeducted,
+        amountReturned: data?.amountReturned,
       });
 
-      onDeleteSuccess()
+      onDeleteSuccess();
 
     } catch (error) {
       console.error('Error saving form data:', error.message);
     }
   };
-
   return (
     <>
       {form && <div>
@@ -110,6 +111,8 @@ const CancelForm = ({ bookingId: id, onDeleteSuccess }) => {
         <div>
         <h2>Cancellation Details:</h2>
         <table>
+          <tbody>
+
         <tr><td><strong>Name:</strong> {result.name}</td></tr>
         <tr><td><strong>Branch:</strong> {result.branch}</td>
         </tr>
@@ -121,7 +124,9 @@ const CancelForm = ({ bookingId: id, onDeleteSuccess }) => {
         <tr><td><strong>Number of Days:</strong> {result.numberOfDays}</td></tr>
         <tr><td><strong>Amount Deducted:</strong> {result.amountDeducted}</td></tr>
         <tr><td><strong>Amount Returned:</strong> {result.amountReturned}</td></tr>
-        <tr><td>for deduction please check the guidelines on the home page.</td></tr>
+        <tr><td><strong>To find information about cancellation charges, please refer to the guidelines available on the homepage.</strong></td></tr>
+        <tr><td><strong>Please navigate to your booking history in order to download the cancellation receipt.</strong></td></tr>
+          </tbody>
         </table>
       </div>
       )}

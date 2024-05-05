@@ -15,8 +15,8 @@
     align-items: left;
     z-index: 10001;
     position: absolute;
-    left: 200px;
-    font-size: 2rem; 
+    left: 175px;
+    font-size: 1.5rem; 
     width: 600px;
 }
 .menu-icon {
@@ -145,7 +145,7 @@
     transform: translateY(3px);
 }
 
-@media screen and (max-width:1700px) {
+@media screen and (max-width:5000px) {
     .colg-name{
         font-size: 1.5rem;
         left: 175px;
