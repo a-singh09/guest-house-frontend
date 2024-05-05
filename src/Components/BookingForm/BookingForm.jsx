@@ -1,6 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
 import "./BookingForm.css";
 import { FormContext } from "../ContextHooks/FormContext";
+import { useLoginContext } from "../ContextHooks/LoginContext";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -14,11 +16,23 @@ const toastStyle = {
   progress: undefined,
 };
 
-const BookingForm = ({ startDate, endDate, onFormValidChange, formData }) => {
+const BookingForm = ({
+  startDate,
+  endDate,
+  onFormValidChange,
+  formData,
+  registerOption,
+}) => {
   const { updateFormData } = useContext(FormContext);
   const [numCompanions, setNumCompanions] = useState(0); // Start with 0 companions
   const [companionInputs, setCompanionInputs] = useState([]);
   const [isFormValid, setIsFormValid] = useState(false);
+
+  const [purposeOptions, setPurposeOptions] = useState([]);
+  const [showOtherReason, setShowOtherReason] = useState(false);
+  const [otherReason, setOtherReason] = useState("");
+
+  const { isAdm } = useLoginContext();
 
   const sD = new Date(startDate);
   const eD = new Date(endDate);
@@ -31,65 +45,108 @@ const BookingForm = ({ startDate, endDate, onFormValidChange, formData }) => {
   const formattedStartDate = sD.toLocaleDateString("en-US", options);
   const formattedEndDate = eD.toLocaleDateString("en-US", options);
 
+  // const handleInputChange = (event) => {
+  //   const { name, value } = event.target;
+  //   updateFormData(event.target.name, event.target.value);
+  //   validateForm();
+  // };
+
   const handleInputChange = (event) => {
-    updateFormData(event.target.name, event.target.value);
-    validateForm();
+    const { name, value } = event.target;
+    if (name === "purpose") {
+      if (value === "Others") {
+        updateFormData("purpose", "");
+        setShowOtherReason(true); // Show input field for specifying other reason
+      } else {
+        updateFormData("purpose", value);
+        setShowOtherReason(false); // Hide input field if option is not "Others"
+      }
+
+      // updateFormData("purpose", value); // Update form data with selected purpose
+    } else if (name === "otherReason") {
+      setOtherReason(value); // Update other reason state
+      updateFormData("purpose", value); // Update form data with other reason
+    } else {
+      updateFormData(name, value); // Update form data for other fields
+    }
+    validateForm(); // Validate form after input change
   };
+
+  useEffect(() => {
+    if (registerOption === 1) {
+      setPurposeOptions([
+        "Official Work",
+        "Workshop",
+        "Short Term Course",
+        "Conference",
+        "Personal",
+        "Others",
+      ]); // Define your dropdown options here
+    } else {
+      setPurposeOptions([]);
+    }
+  }, [registerOption]);
 
   const handlePhoneInputBlur = (event) => {
     const { name, value } = event.target;
-  
+
     // Custom validation for phone number
     if (name === "phNumber") {
       // Check if the value is a valid number and has at most 10 digits
       const isValidPhoneNumber = /^\d{10}$/.test(value);
-  
+
       if (!isValidPhoneNumber) {
         // If not valid, show an alert and return
-        toast.error("Invalid phone number. Please enter a valid 10-digit phone number.",toastStyle);
+        toast.error(
+          "Invalid phone number. Please enter a valid 10-digit phone number.",
+          toastStyle
+        );
         event.target.value = "";
-        handleInputChange(event)
+        handleInputChange(event);
         // console.log("phNumber : ",event.target.value);
-        // updateFormData(name, value);      
+        // updateFormData(name, value);
         // validateForm()
         return;
       }
     }
-  
+
     // Allow the update if validation passed
     // updateFormData(name, value);
     // validateForm();
-    handleInputChange(event)
+    handleInputChange(event);
   };
-  
 
   const handleEmailInputBlur = (event) => {
     const { name, value } = event.target;
-  
+
     // Custom validation for email
     if (name === "email") {
       // Check if the value is a valid email address
       const isValidEmail = /\S+@\S+\.\S+/.test(value);
-  
+
       if (!isValidEmail) {
         // If not valid, show an alert and return
-        toast.error("Invalid email address. Please enter a valid email.", toastStyle);
+        toast.error(
+          "Invalid email address. Please enter a valid email.",
+          toastStyle
+        );
         event.target.value = "";
-        handleInputChange(event)
+        handleInputChange(event);
         return;
       }
     }
-  
+
     // Update the form data and validate the form
     // updateFormData(name, value);
     // validateForm();
-    handleInputChange(event)
+    handleInputChange(event);
   };
-  
-  const handleNumCompanionsChange = (event) => {
-    handleInputChange(event);  
 
-    const num = Math.max(0, Math.min(10, parseInt(event.target.value, 10))) || 0;
+  const handleNumCompanionsChange = (event) => {
+    handleInputChange(event);
+
+    const num =
+      Math.max(0, Math.min(10, parseInt(event.target.value, 10))) || 0;
     setNumCompanions(num);
 
     // Generate companion input fields
@@ -131,10 +188,11 @@ const BookingForm = ({ startDate, endDate, onFormValidChange, formData }) => {
 
     // Check if all required fields are filled
     const isValid = requiredFields.every((field) => !!formData[field]);
-    console.log("is valid form ",isValid);
+    console.log("is valid form ", isValid);
     // Check if all companion names are filled, but only if there are companions
     const isCompanionsValid =
-      numCompanions === 0 || companionInputs.every((companion) => !!formData[companion.name]);
+      numCompanions === 0 ||
+      companionInputs.every((companion) => !!formData[companion.name]);
 
     // Set the form validity based on all validations
     const formValid = isValid && isCompanionsValid;
@@ -146,53 +204,99 @@ const BookingForm = ({ startDate, endDate, onFormValidChange, formData }) => {
     <>
       <div className="form-container formWrapper">
         <form className="row g-3 book-form">
-          <p className="warning-para">All fields marked with (*) are mandatory.</p>
+          <p className="warning-para">
+            All fields marked with (*) are mandatory.
+          </p>
           <div className="col-md-6">
             <label htmlFor="firstName" className="form-label">
               First Name<span className="asterisk">*</span>
             </label>
-            <input type="text" className="form-control" id="firstName" name="firstName" onChange={handleInputChange} required />
+            <input
+              type="text"
+              className="form-control"
+              id="firstName"
+              name="firstName"
+              onChange={handleInputChange}
+              required
+            />
           </div>
           <div className="col-md-6">
             <label htmlFor="lastName" className="form-label">
               Last Name
             </label>
-            <input type="text" className="form-control" id="lastName" name="lastName" onChange={handleInputChange} />
+            <input
+              type="text"
+              className="form-control"
+              id="lastName"
+              name="lastName"
+              onChange={handleInputChange}
+            />
           </div>
           <div className="col-12">
             <label htmlFor="inputEmail4" className="form-label">
               Email<span className="asterisk">*</span>
             </label>
-            <input type="email" className="form-control" id="inputEmail4" name="email" 
-            onChange={handleInputChange}
-            onBlur={handleEmailInputBlur} 
-            required />
+            <input
+              type="email"
+              className="form-control"
+              id="inputEmail4"
+              name="email"
+              onChange={handleInputChange}
+              onBlur={handleEmailInputBlur}
+              required
+            />
           </div>
           <div className="col-12">
             <label htmlFor="inputAddress" className="form-label">
               Address<span className="asterisk">*</span>
             </label>
-            <input type="text" className="form-control" id="inputAddress" name="address" onChange={handleInputChange} required />
+            <input
+              type="text"
+              className="form-control"
+              id="inputAddress"
+              name="address"
+              onChange={handleInputChange}
+              required
+            />
           </div>
           <div className="col-md-6">
             <label htmlFor="phNumber" className="form-label">
               Phone Number<span className="asterisk">*</span>
             </label>
-            <input type="text" className="form-control" id="phNumber" name="phNumber" onChange={handleInputChange}
-             onBlur={handlePhoneInputBlur}
-             required />
+            <input
+              type="text"
+              className="form-control"
+              id="phNumber"
+              name="phNumber"
+              onChange={handleInputChange}
+              onBlur={handlePhoneInputBlur}
+              required
+            />
           </div>
           <div className="col-md-6">
             <label htmlFor="designation" className="form-label">
               Designation<span className="asterisk">*</span>
             </label>
-            <input type="text" className="form-control" id="designation" name="designation" onChange={handleInputChange} required />
+            <input
+              type="text"
+              className="form-control"
+              id="designation"
+              name="designation"
+              onChange={handleInputChange}
+              required
+            />
           </div>
           <div className="col-12">
             <label htmlFor="numCompanions" className="form-label">
               Number of Companions<span className="asterisk">*</span>
             </label>
-            <select className="form-control" id="numCompanions" name="numCompanions" value={numCompanions} onChange={handleNumCompanionsChange}>
+            <select
+              className="form-control"
+              id="numCompanions"
+              name="numCompanions"
+              value={numCompanions}
+              onChange={handleNumCompanionsChange}
+            >
               {Array.from({ length: 11 }, (_, index) => (
                 <option key={index} value={index}>
                   {index}
@@ -202,11 +306,21 @@ const BookingForm = ({ startDate, endDate, onFormValidChange, formData }) => {
           </div>
           {companionInputs.map((companion, index) => (
             <div className="col-md-6" key={companion.id}>
-              <input type="text" className="form-control" id={companion.id} name={companion.name} placeholder={`Companion ${index + 1} name*`} onChange={handleInputChange} required />
+              <input
+                type="text"
+                className="form-control"
+                id={companion.id}
+                name={companion.name}
+                placeholder={`Companion ${index + 1} name*`}
+                onChange={handleInputChange}
+                required
+              />
             </div>
           ))}
           {/* <h6 className="head-six">Arrival Details*</h6> */}
-          <label htmlFor="" className="form-label">Arrival Details<span className="asterisk">*</span></label>
+          <label htmlFor="" className="form-label">
+            Arrival Details<span className="asterisk">*</span>
+          </label>
           <div className="col-md-6">
             <input
               type="text"
@@ -218,11 +332,19 @@ const BookingForm = ({ startDate, endDate, onFormValidChange, formData }) => {
             />
           </div>
           <div className="col-md-4">
-            <input type="text" className="form-control" placeholder="Check in timing : 12:00 pm" name="arrivalTime"  readOnly />
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Check in timing : 12:00 pm"
+              name="arrivalTime"
+              readOnly
+            />
             {/* <p>Check in timing : 12:00 pm</p> */}
           </div>
           {/* <h6 className="head-six">Departure Details*</h6> */}
-          <label htmlFor="" className="form-label">Departure Details<span className="asterisk">*</span></label>
+          <label htmlFor="" className="form-label">
+            Departure Details<span className="asterisk">*</span>
+          </label>
           <div className="col-md-6">
             <input
               type="text"
@@ -234,49 +356,103 @@ const BookingForm = ({ startDate, endDate, onFormValidChange, formData }) => {
             />
           </div>
           <div className="col-md-4">
-            <input type="text" className="form-control" placeholder="Check out timing : 11:00 am" readOnly />
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Check out timing : 11:00 am"
+              readOnly
+            />
             {/* <p>Check out timing : 11:00 am</p> */}
           </div>
-          <div className="col-12">
+          {/* <div className="col-12">
             <label htmlFor="purpose" className="form-label">
               Purpose of visit<span className="asterisk">*</span>
             </label>
             <input type="text" className="form-control" id="purpose" name="purpose" onChange={handleInputChange} required />
-          </div>
-          <div className="temp">
-          <h6 className="head-six">Kind of Visit</h6> 
-            <div className="form-check form-check-inline">
-            <input
-                  className="form-check-input"
-                  type="radio"
-                  name="visitType"
-                  id="officialVisit"
-                  onChange={handleInputChange}
-                  required
-                />
-                <label className="form-check-label" htmlFor="officialVisit">
-                  Official
-                </label>
-              </div>
-              <div className="form-check form-check-inline">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="visitType"
-                  id="unofficialVisit"
-                  onChange={handleInputChange}
-                  required
-                />
-                <label className="form-check-label" htmlFor="unofficialVisit">
-                  Unofficial
-                </label>
-              </div>
-            </div>
-          </form>
-        </div>
-      </>
-    );
-  };
-  
-  export default BookingForm;
+          </div> */}
 
+          {registerOption == 1 && !isAdm ? (
+            <div className="col-12">
+              <label htmlFor="purpose" className="form-label">
+                Purpose of visit<span className="asterisk">*</span>
+              </label>
+              <select
+                className="form-select custom-select"
+                id="purpose"
+                name="purpose"
+                // value={purpose}
+                onChange={handleInputChange}
+                required
+              >
+                {/* <option value="">Select purpose</option> */}
+                {purposeOptions.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+              {showOtherReason && (
+                <input
+                  type="text"
+                  style={{ marginTop: "10px" }}
+                  className="form-control"
+                  id="otherReason"
+                  name="otherReason"
+                  placeholder="Specify other reason"
+                  value={otherReason}
+                  onChange={handleInputChange}
+                  required
+                />
+              )}
+            </div>
+          ) : (
+            <div className="col-12">
+              <label htmlFor="purpose" className="form-label">
+                Purpose of visit<span className="asterisk">*</span>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="purpose"
+                name="purpose"
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+          )}
+          <div className="temp">
+            <h6 className="head-six">Kind of Visit</h6>
+            <div className="form-check form-check-inline">
+              <input
+                className="form-check-input"
+                type="radio"
+                name="visitType"
+                id="officialVisit"
+                onChange={handleInputChange}
+                required
+              />
+              <label className="form-check-label" htmlFor="officialVisit">
+                Official
+              </label>
+            </div>
+            <div className="form-check form-check-inline">
+              <input
+                className="form-check-input"
+                type="radio"
+                name="visitType"
+                id="unofficialVisit"
+                onChange={handleInputChange}
+                required
+              />
+              <label className="form-check-label" htmlFor="unofficialVisit">
+                Unofficial
+              </label>
+            </div>
+          </div>
+        </form>
+      </div>
+    </>
+  );
+};
+
+export default BookingForm;
