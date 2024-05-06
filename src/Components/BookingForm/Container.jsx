@@ -32,6 +32,7 @@ const Container = ({ isAdmin, adminId }) => {
   const [dateDetails, setDateDetails] = useState(null);
   const [isFormValid, setFormValid] = useState(false); // Form validation state
   const [isStudent, setIsStudent] = useState(false);
+  const [isRegisterOption, setIsRegisterOption] = useState(1);
   const navigate = useNavigate();
 
   const openPopup = () => {
@@ -61,6 +62,9 @@ const Container = ({ isAdmin, adminId }) => {
         .then((data) => {
           console.log("The data is : ")
           console.log(data);
+          console.log("registerOption :",data.userDetails.registerOption);
+          setIsRegisterOption(data.userDetails.registerOption)
+
           if (isAdmin) {
             setAdminDetails({
               ...formData,
@@ -104,7 +108,7 @@ const Container = ({ isAdmin, adminId }) => {
     setFormValid(valid);
   };
 
-
+  console.log("registerOption using state :",isRegisterOption);
   console.log("body details: ", userDetails);
   console.log("admin details: ", adminDetails);
 
@@ -117,7 +121,8 @@ const Container = ({ isAdmin, adminId }) => {
       return;
     }
     // console.log("blah blah");
-    console.log(userDetails);
+    // console.log("user details : " ,userDetails);
+    // console.log("user details registerOption : " ,userDetails.registerOption);
 
     // console.log(userDetails);
     if (isAdmin) {
@@ -160,10 +165,11 @@ const Container = ({ isAdmin, adminId }) => {
                 startDate={dateDetails.startDate}
                 endDate={dateDetails.endDate}
                 onFormValidChange={handleFormValidChange}
+                registerOption={isRegisterOption}
               />
             )}
             {!dateDetails && (
-              <BookingForm formData={formData} onFormValidChange={handleFormValidChange} />
+              <BookingForm formData={formData} onFormValidChange={handleFormValidChange} registerOption={isRegisterOption} />
             )}
           </div>
         </div>
