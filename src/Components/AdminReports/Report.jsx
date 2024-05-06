@@ -61,13 +61,14 @@ const BookingTable = () => {
   const fetchReportData = async (type, fromDate, toDate, userId) => {
     try {
       let apiUrl;
-  
+    
       switch (type) {
         case 'upcoming':
           // apiUrl = ${import.meta.env.VITE_API_URL}/users/65b76d036cdb971024d4e6f0/bookingHistory/upcoming;
           navigate({
             pathname: "/upcomingReport", 
-            // state: { apiUrl }
+            
+            
           });
           break;
         case 'past':
@@ -128,9 +129,9 @@ const BookingTable = () => {
           <div className="mb-3">
             <label htmlFor="bookingType" className="form-label">Select Booking Type:</label>
             <select className="form-select" id="bookingType" value={bookingType} onChange={handleBookingTypeChange}>
-              <option value="past">Past Bookings</option>
+              <option value="past">Completed Bookings</option>
               <option value="cancelled">Cancelled Bookings</option>
-              <option value="upcoming">Upcoming Bookings</option>
+              <option value="upcoming"> Bookings</option>
             </select>
           </div>
         </div>

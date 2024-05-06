@@ -9,6 +9,7 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import LogoImage from "../../images/logo_250.png.png"
 
 const columns = [
   { id: "SNO", label: "SNO.", minWidth: 50 },
@@ -80,29 +81,76 @@ const BookingCancellationReport = () => {
   const tableRef = useRef(null);
 
 
-  const handleDownloadPDF = () => {
-    const input = tableRef.current;
+  const handleDownloadPDF = (startDate, endDate) => {
+    const pdf = new jsPDF("p", "mm", "a4");
+    let yPos = 10;
   
-    if (!input) {
-      console.error("Table element is null.");
-      return;
-    }
+    // Add logo
+    const logoImg = new Image();
+    logoImg.src =LogoImage; // Replace with the path to your logo image
+    const logoWidth = 20; // Adjust the width of the logo as needed
+    const logoHeight = logoWidth * (logoImg.height / logoImg.width);
+    pdf.addImage(logoImg, 'PNG', 10, yPos, logoWidth, logoHeight);
   
-    html2canvas(input)
-      .then((canvas) => {
-        const pdf = new jsPDF("p", "mm", "a4");
-        const imgWidth = 210;
-        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    // Add 'NIT JALANDHAR' text
+    const nitTextXPos = 10 + logoWidth + 5; // Adjust the position as needed
+    const nitTextYPos = yPos + (logoHeight / 2) + 5; // Adjust the position as needed
+    pdf.setFontSize(12);
+    pdf.setTextColor(100, 100, 100);
+    pdf.text("NIT JALANDHAR", nitTextXPos, nitTextYPos);
   
-        // Adjust the scale factor for better readability
-        const scaleFactor = 1; // You can adjust this value
-        pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, imgWidth * scaleFactor, imgHeight * scaleFactor);
-        pdf.save("table.pdf");
-      })
-      .catch((error) => {
-        console.error("Error converting table to PDF:", error);
-      });
+    // Add dynamic header text
+    yPos += logoHeight + 10;
+    const dynamicHeaderText = `Guest House Booking statement from ${startDate} to ${endDate}`;
+    const dynamicHeaderTextWidth = pdf.getStringUnitWidth(dynamicHeaderText) * 12 / pdf.internal.scaleFactor;
+    const dynamicHeaderXPos = (pdf.internal.pageSize.getWidth() - dynamicHeaderTextWidth) / 2;
+    pdf.setFontSize(14);
+    pdf.setTextColor(0, 0, 0);
+    pdf.text(dynamicHeaderText, dynamicHeaderXPos, yPos);
+    yPos += 10;
+  
+    // Add 'Past Booking' header text below the dynamic header
+    const pastBookingTextWidth = pdf.getStringUnitWidth("Completed Booking") * 10 / pdf.internal.scaleFactor;
+    const pastBookingXPos = (pdf.internal.pageSize.getWidth() - pastBookingTextWidth) / 2;
+    pdf.setFontSize(12);
+    pdf.setTextColor(100, 100, 100);
+    pdf.text("Completed Booking", pastBookingXPos, yPos);
+    yPos += 10;
+  
+    // Add table header
+    const headers = columns.map(column => column.label);
+    const rowsData = rows.map(row => columns.map(column => row[column.id]));
+  
+    pdf.autoTable({
+      startY: yPos,
+      head: [headers],
+      body: rowsData,
+      theme: 'striped',
+      styles: {
+        font: 'helvetica',
+        fontSize: 10,
+        overflow: 'linebreak',
+        cellPadding: 2,
+        halign: 'center',
+      },
+      columnStyles: {
+        0: { cellWidth: 20 }, // Adjust column width as needed
+        1: { cellWidth: 20 },
+        2: { cellWidth: 20 },
+        4: { cellWidth: 20 },
+        5: { cellWidth: 20 },
+        6: { cellWidth: 20 },
+        7: { cellWidth: 20 },
+        8: { cellWidth: 20 },
+        9: { cellWidth: 20 },
+        10: { cellWidth: 20 },
+        // Add more column styles as needed
+      },
+    });
+  
+    pdf.save("table.pdf");
   };
+  
   
 
   useEffect(() => {
