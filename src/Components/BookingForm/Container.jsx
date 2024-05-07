@@ -78,6 +78,7 @@ const Container = ({ isAdmin, adminId }) => {
               const details = data.userDetails;
               registerOptionSpecificFields = {
                 isStudent: details.registerOption === 2,
+                isFaculty: details.registerOption === 1, 
                 PersonDept: JSON.parse(details.isNitUser) ? details.nitUserDept : ""
               }
             } 
