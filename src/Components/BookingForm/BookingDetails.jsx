@@ -154,7 +154,7 @@ const BookingDetails = ({ setDateDetails }) => {
         (selectedCheckoutDate.getTime() - selectedCheckinDate.getTime()) /
         (1000 * 3600 * 24);
 
-      if (!isAdm && selectedDurationOfStay > 10) {
+      if (!isAdm && selectedDurationOfStay > 3) {
         toast.error("Maximum stay can be 3 days only!", toastStyle);
       } else {
         setCheckoutDate(selectedDate);
@@ -181,7 +181,7 @@ const BookingDetails = ({ setDateDetails }) => {
 
     if (selectedRooms < 1) {
       toast.error("Minimum 1 room should be selected.", toastStyle);
-    } else if (!isAdm && selectedRooms > 10) {
+    } else if (!isAdm && selectedRooms > 2) {
       toast.error("You can book maximum of 2 rooms only.", toastStyle);
     } else {
       // For admin, check if the selected rooms exceed the maximum rooms for the guesthouse
