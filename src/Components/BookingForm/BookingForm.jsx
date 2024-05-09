@@ -51,26 +51,52 @@ const BookingForm = ({
   //   validateForm();
   // };
 
+  // const handleInputChange = (event) => {
+  //   const { name, value } = event.target;
+  //   if (name === "purpose") {
+  //     if (value === "Others") {
+  //       updateFormData("purpose", "");
+  //       setShowOtherReason(true); // Show input field for specifying other reason
+  //     } else {
+  //       updateFormData("purpose", value);
+  //       setShowOtherReason(false); // Hide input field if option is not "Others"
+  //     }
+
+  //     // updateFormData("purpose", value); // Update form data with selected purpose
+  //   } else if (name === "otherReason") {
+  //     setOtherReason(value); // Update other reason state
+  //     updateFormData("purpose", value); // Update form data with other reason
+  //   } else {
+  //     updateFormData(name, value); // Update form data for other fields
+  //   }
+  //   validateForm(); // Validate form after input change
+  // };
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
+  
     if (name === "purpose") {
-      if (value === "Others") {
+      if (value === "") {
         updateFormData("purpose", "");
+        // Ignore selecting the placeholder "Select purpose"
+        return;
+      } else if (value === "Others") {
+        updateFormData("purpose", ""); // Clear purpose if "Others" is selected
         setShowOtherReason(true); // Show input field for specifying other reason
       } else {
-        updateFormData("purpose", value);
+        updateFormData("purpose", value); // Update form data with selected purpose
         setShowOtherReason(false); // Hide input field if option is not "Others"
       }
-
-      // updateFormData("purpose", value); // Update form data with selected purpose
     } else if (name === "otherReason") {
       setOtherReason(value); // Update other reason state
       updateFormData("purpose", value); // Update form data with other reason
     } else {
       updateFormData(name, value); // Update form data for other fields
     }
+  
     validateForm(); // Validate form after input change
   };
+  
 
   useEffect(() => {
     if (registerOption === 1) {
@@ -331,7 +357,7 @@ const BookingForm = ({
               readOnly
             />
           </div>
-          <div className="col-md-4">
+          <div className="col-md-6">
             <input
               type="text"
               className="form-control"
@@ -355,7 +381,7 @@ const BookingForm = ({
               readOnly
             />
           </div>
-          <div className="col-md-4">
+          <div className="col-md-6">
             <input
               type="text"
               className="form-control"
@@ -384,7 +410,8 @@ const BookingForm = ({
                 onChange={handleInputChange}
                 required
               >
-                {/* <option value="">Select purpose</option> */}
+                <option value="">Select purpose</option>
+                
                 {purposeOptions.map((option) => (
                   <option key={option} value={option}>
                     {option}
