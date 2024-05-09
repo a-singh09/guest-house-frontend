@@ -7,9 +7,11 @@
     margin: 10px;
     border-radius: 5px;
     border: 1px solid black;
-    justify-content: center;
+  
     cursor: pointer;
-    /* pointer-events: none;  */
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
   /* .divtt:hover {
@@ -23,9 +25,11 @@
     margin: 10px;
     border-radius: 5px;
     border: 1px solid black;
-    justify-content: center;
+    
     cursor: pointer;
-    /* transition: background-color 0.3s; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .bookedRoom {
@@ -35,9 +39,11 @@
     margin: 10px;
     border-radius: 5px;
     border: 1px solid black;
-    justify-content: center;
     cursor: pointer;
     /* transition: background-color 0.3s; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .roombookingu{
     display: flex;
