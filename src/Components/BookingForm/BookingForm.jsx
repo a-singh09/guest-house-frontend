@@ -323,7 +323,7 @@ const BookingForm = ({
               value={numCompanions}
               onChange={handleNumCompanionsChange}
             >
-              {Array.from({ length: 11 }, (_, index) => (
+              {Array.from({ length: 7 }, (_, index) => (
                 <option key={index} value={index}>
                   {index}
                 </option>
