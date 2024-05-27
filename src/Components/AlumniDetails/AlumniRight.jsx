@@ -61,7 +61,7 @@ export default function AlumniRight({ prop }) {
       {/* <form onSubmit={handleSubmit}> */}
       {/* <div className="row input"> */}
       <div className="form-group regform-group-custom">
-        <label>First Name:</label>
+        <label>Alumni First Name:</label>
         <input
           type="text"
           className="form-control mb-3"
@@ -71,7 +71,7 @@ export default function AlumniRight({ prop }) {
         />
       </div>
       <div className="form-group regform-group-custom">
-        <label>Last Name:</label>
+        <label>Alumni Last Name:</label>
         <input
           type="text"
           className="form-control mb-3"
@@ -94,7 +94,7 @@ export default function AlumniRight({ prop }) {
               value={studbranch}
               onChange={(e) => handleInputChange(e, setSbranch)}
             /> */}
-        <label>Branch:</label>
+        <label>Alumni Branch:</label>
         {/* <Dropdown names={['Computer Science and Technology', 'Instrumental and Control Engineering', 'Electrical Engineering', 'Industrial and Production Engineering', 'Textile Technology', 'Mechanical Engineering', 'Biotechonology', 'Electronics and Communication Engineering', 'Civil Engineering', 'Information Engineering', 'Chemical Engineering', 'Physics', 'Chemistry', 'Mathematics', 'Humanities and Management']} placeholder={'Branch'} Branch={department} setBranch={setDepartment} /> */}
         <Dropdown
   names={[
@@ -122,7 +122,7 @@ export default function AlumniRight({ prop }) {
       </div>
 
       <div className="form-group regform-group-custom">
-        <label>Batch:</label>
+        <label>Alumni Batch:</label>
         {/* <input
           type="text"
           className="form-control mb-3"
@@ -148,7 +148,7 @@ export default function AlumniRight({ prop }) {
       </div>
       {/* </div> */}
       <div className="form-group regform-group-custom">
-        <label>Phone No:</label>
+        <label>ALumni Phone No:</label>
         
   
         <div style={{ display: 'flex' }}>

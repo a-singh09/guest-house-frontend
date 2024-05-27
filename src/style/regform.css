@@ -123,8 +123,12 @@ box-shadow: 2px 3px 10px rgb(171, 171, 171),-3px -3px 10px rgb(190, 190, 190);
   cursor: pointer;
   padding: 10px;
   border-radius: 5px;
+  width: 98px;
   margin: 5px;
   transition: all 1s;
+}
+.reference_btn{
+margin: 0 10px;
 }
 
 .btnClicked {
@@ -135,6 +139,7 @@ box-shadow: 2px 3px 10px rgb(171, 171, 171),-3px -3px 10px rgb(190, 190, 190);
   padding: 2px 20px;
   border-radius: 15px;
   transition: all 0.5s;
+  width: 100px;
   margin: 5px 20px;
 }
 

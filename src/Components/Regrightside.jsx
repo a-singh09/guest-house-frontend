@@ -7,13 +7,18 @@ import Alumni from "./AlumniDetails/AlumniRight";
 import Faculty from "./FacultyDetails/FacultyRight";
 import Student from "./StudentDetails/StudentRight";
 import Dropdown from "./Dropdown/Dropdown";
-import "../../node_modules/bootstrap/dist/css/bootstrap.min.css" 
+import "../../node_modules/bootstrap/dist/css/bootstrap.min.css"
 import { Icon } from '@iconify/react';
 import teacher_img from '../images/reference-formimgs/teacher.png'
 import stud_img from '../images/reference-formimgs/student.png'
 import alumni_img from '../images/reference-formimgs/alumni.png'
 import Popup from "./PopUp/Popup";
 import usePasswordToggle from "./Passwordvisible/usePasswordToggle";
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
 
 export default function Regrightside() {
   const navigate = useNavigate();
@@ -42,6 +47,7 @@ export default function Regrightside() {
   const [ConfirmPassword, setConfirmPassword] = useState("");
   const [PasswordInputType, ToggleIcon] = usePasswordToggle();
   const [PasswordInputType2, ToggleIcon2] = usePasswordToggle();
+  const [alumni_value, setAlumni_value] = useState("")
 
   // Alumni
   const [batch, setBatch] = useState("");
@@ -72,6 +78,10 @@ export default function Regrightside() {
   // const setStyle=(e)=>{
   //  Password;
   // }
+  const alumni_value_Change = (e) => {
+    setAlumni_value(e.target.value);
+
+  }
   const handleEmailChange = (e) => {
     const inputEmail = e.target.value;
     setEmail(inputEmail);
@@ -147,7 +157,7 @@ export default function Regrightside() {
 
   }
 
-  const   setSubmit = (e) => {
+  const setSubmit = (e) => {
     e.preventDefault();
     const newEntry = {
       Email: Email,
@@ -238,7 +248,7 @@ export default function Regrightside() {
       setPara2("");
       setPopup(val);
     } else if (message === "pending") {
-      if(registerOptn == 3)
+      if (registerOptn == 3)
         setMessagehead("Please Wait for Approval from the Institute");
       setPopup(val);
     } else if (error) {
@@ -264,20 +274,20 @@ export default function Regrightside() {
             </div> */}
               <div className="registration-optn" style={{ left: `${registerrightval}px`, height: '500px' }}>
                 <div style={{ display: 'flex' }} >
-                
+
 
                   <div tabIndex="0" onClick={() => {
-                    setRegisteroptn(1), setRegisterclass(true),onView(),regOnview();
+                    setRegisteroptn(1), setRegisterclass(true), onView(), regOnview();
                   }} className="college-official-optn" >
-                    <Icon icon="fluent-emoji-high-contrast:teacher" width={'80'} height={'80'} color="#007bff" /> <p>Faculty</p>
+                    <Icon icon="fluent-emoji-high-contrast:teacher" width={'80'} height={'80'} color="#007bff" /> <p>Employee</p>
                   </div>     <div tabIndex="0" onClick={() => {
-                    setRegisteroptn(2), setRegisterclass(true),onView(),regOnview();
+                    setRegisteroptn(2), setRegisterclass(true), onView(), regOnview();
                   }} className="college-official-optn" >
                     <Icon icon="ph:student-bold" width={'80'} height={'80'} color="#007bff" /> <p>Student</p>
                   </div>
 
                   <div tabIndex="0" onClick={() => {
-                    setRegisteroptn(3), setRegisterclass(true),onView(), regOnview();
+                    setRegisteroptn(3), setRegisterclass(true), onView(), regOnview();
                   }} className="college-official-optn">
                     <Icon icon="iconamoon:profile" width={'80'} height={'80'} color="#007bff" />  <p>Others</p>
                   </div>
@@ -376,27 +386,27 @@ export default function Regrightside() {
                     <div className="form-group regform-group-custom">
                       <label>Department:</label>
                       <Dropdown
-  names={[
-    'Biotechnology',
-    'Chemical Engineering',
-    'Chemistry',
-    'Civil Engineering',
-    'Computer Science and Engineering',
-    'Electrical Engineering',
-    'Electronics and Communication Engineering',
-    'Humanities and Management',
-    'Industrial and Production Engineering',
-    'Information Technology',
-    'Instrumentation and Control Engineering',
-    'Mathematics',
-    'Mechanical Engineering',
-    'Physics',
-    'Textile Engineering',
-  ]}
-  placeholder={'Branch'}
-  Branch={department}
-  setBranch={setDepartment}
-/>
+                        names={[
+                          'Biotechnology',
+                          'Chemical Engineering',
+                          'Chemistry',
+                          'Civil Engineering',
+                          'Computer Science and Engineering',
+                          'Electrical Engineering',
+                          'Electronics and Communication Engineering',
+                          'Humanities and Management',
+                          'Industrial and Production Engineering',
+                          'Information Technology',
+                          'Instrumentation and Control Engineering',
+                          'Mathematics',
+                          'Mechanical Engineering',
+                          'Physics',
+                          'Textile Engineering',
+                        ]}
+                        placeholder={'Branch'}
+                        Branch={department}
+                        setBranch={setDepartment}
+                      />
                     </div>
 
 
@@ -584,6 +594,7 @@ export default function Regrightside() {
                         id="fileInput"
                       />
                     </div>
+
                     <div className="form-group regform-group-custom">
                       <button
                         type="submit"
@@ -625,6 +636,7 @@ export default function Regrightside() {
                         placeholder="Last Name"
                       />
                     </div>
+
 
                     <div className="form-group regform-group-custom">
                       <label>Phone No:</label>
@@ -728,15 +740,60 @@ export default function Regrightside() {
                       />
 
                     </div>
-                    <div> 
+                    <div className="form-group regform-group-custom">
+                      <FormControl>
+                        <FormLabel id="demo-radio-buttons-group-label">Are you an Alumni?</FormLabel>
+                        <RadioGroup
+                          row
+                          required
+                          aria-labelledby="demo-radio-buttons-group-label"
+                          value={alumni_value}
+                          onChange={alumni_value_Change}
+
+                          name="controlled-radio-buttons-group"
+                        >
+                          <FormControlLabel value="yes" onClick={() => setContentType("alumni")} control={<Radio />} label="Yes" />
+                          <FormControlLabel value="no" onClick={() => setContentType("")} control={<Radio />} label="No" />
+
+                        </RadioGroup>
+                      </FormControl>
+
                     </div>
-                    <div className="row input align-items-center">
+                    {contentType == "alumni" &&  (
+                      <Alumni
+                        prop={{
+                          reffirstName,
+                          reflastName,
+                          refphoneNumber,
+                          batch,
+                          department,
+                          jobProfile,
+                          setReffirstName,
+                          setReflastName,
+                          setRefphoneNumber,
+                          setBatch,
+                          setDepartment,
+                          setJobProfile,
+                          messageHead_m,
+                          para1_m,
+                          para2_m,
+                          setPopup,
+                          popup,
+                        }}
+                      />
+                    )}
+                    <div>
+                    </div>
+                    {alumni_value=="no"&&
+                    
+                    (<>
+                     <div className="row input align-items-center">
                       <div className="col-md-3 col-sm-6 col-12">
                         <h2 className="reference-heading">Reference</h2>
                       </div>
                     </div>
                     <div className="d-flex flex-column flex-sm-row flex-md-row justify-content-center align-items-center">
-                      <div className="col-sm-12 col-md-6 col-lg-3 mb-3">
+                      <div className="reference_btn">
                         <label>
                           <button
                             type="button"
@@ -750,15 +807,15 @@ export default function Regrightside() {
                               src={stud_img}
                               alt="Icon"
                               className="reference-img"
-                              
+
                             />
                             <p className="reference-tag"> Student</p>
-                           
+
                           </button>
                         </label>
                       </div>
 
-                      <div className="col-sm-12 col-md-6 col-lg-3 mb-3">
+                      <div className="reference_btn">
                         <label>
                           <button
                             type="button"
@@ -772,9 +829,9 @@ export default function Regrightside() {
                               src={teacher_img}
                               alt="Icon"
                               className="reference-img"
-                            
+
                             />
-                            <p className="reference-tag">Faculty</p>
+                            <p className="reference-tag">Employee</p>
                           </button>
                         </label>
                       </div>
@@ -782,28 +839,14 @@ export default function Regrightside() {
 
 
 
-                      <div className="col-md-3 col-sm-6 col-lg-3 mb-3">
-                        <label>
 
-                          <button
-                            type="button"
-                            onClick={() => setContentType("alumni")}
-                            className={` ${contentType === "alumni"
-                              ? clickedButtonClass
-                              : defaultButtonClass
-                              } `}
-                          >
-                            <img
-                              src={alumni_img}
-                              className="reference-img"
-                              alt="Icon"
-                             
-                            />
-                            <p className="reference-tag">Alumni</p>
-                          </button>
-                        </label>
-                      </div>
                     </div>
+                    </>)
+                    
+                    
+                    
+                    }
+                   
 
 
                     {contentType == "student" && (
@@ -848,29 +891,7 @@ export default function Regrightside() {
                         }}
                       />
                     )}
-                    {contentType == "alumni" && (
-                      <Alumni
-                        prop={{
-                          reffirstName,
-                          reflastName,
-                          refphoneNumber,
-                          batch,
-                          department,
-                          jobProfile,
-                          setReffirstName,
-                          setReflastName,
-                          setRefphoneNumber,
-                          setBatch,
-                          setDepartment,
-                          setJobProfile,
-                          messageHead_m,
-                          para1_m,
-                          para2_m,
-                          setPopup,
-                          popup,
-                        }}
-                      />
-                    )}
+                
                     <div className="row input">
                       <NavLink to="/">Already have an account? Login</NavLink>
 
