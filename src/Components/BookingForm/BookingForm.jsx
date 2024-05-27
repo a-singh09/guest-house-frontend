@@ -101,17 +101,17 @@ const BookingForm = ({
   useEffect(() => {
     if (registerOption === 1) {
       setPurposeOptions([
-        "Official Work",
-        "Workshop",
-        "Short Term Course",
         "Conference",
+        "Official Work",
         "Personal",
+        "Short Term Course",
+        "Workshop",
         "Others",
-      ]); // Define your dropdown options here
+      ]); 
     } else {
       setPurposeOptions([]);
     }
-  }, [registerOption]);
+  }, [registerOption] );
 
   const handlePhoneInputBlur = (event) => {
     const { name, value } = event.target;
